@@ -1,6 +1,9 @@
-# Core Components Definitions
+# Design
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/HELK_Stack.png]]
 
+The HELK follows the native flow of an ELK stack with events being sent (preferably from Winlogbeat) to Logstash. Next, they get filtered and sent over to an Elasticsearch database. Then, they can be visualized in a Kibana instance. However, what sets the HELK apart from other ELK builds is the extra analytic capabilities provided by Apache Spark, GraphFrames and Jupyter. More soon....
+
+# Core Components Definitions
 ## Elasticsearch
 "Elasticsearch is a highly scalable open-source full-text search and analytics engine. It allows you to store, search, and analyze big volumes of data quickly and in near real time. It is generally used as the underlying engine/technology that powers applications that have complex search features and requirements." [Elastic Reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
 
@@ -24,6 +27,3 @@ Kibana makes it easy to understand large volumes of data. Its simple, browser-ba
 # Enrichments
 ## AlienVault OTX
 "The AlienVault Open Threat Exchange (OTX) is the world’s most authoritative open threat information sharing and analysis network. OTX provides access to a global community of threat researchers and security professionals, with more than 50,000 participants in 140 countries, who contribute over four million threat indicators daily."[AlienVault OTX Reference](https://www.alienvault.com/documentation/otx/about-otx.htm)
-
-# Design
-The HELK follows the native flow of an ELK stack with events being sent (preferably from Winlogbeat) to Logstash. Next, they get filtered and sent over to an Elasticsearch database. Then, they can be visualized in a Kibana instance. However, what sets the HELK apart from other ELK builds is the extra analytic capabilities provided by Apache Spark, GraphFrames and Jupyter. More soon....
