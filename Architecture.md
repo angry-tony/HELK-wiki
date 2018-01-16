@@ -1,5 +1,5 @@
 # Design
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/HELK_Stack.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/HELK_Design.png]]
 
 The HELK follows the native flow of an ELK stack with events being sent (preferably from Winlogbeat) to Logstash. Next, they get filtered and sent over to an Elasticsearch database. Then, they can be visualized in a Kibana instance. However, what sets the HELK apart from other ELK builds is the extra analytic capabilities provided by Apache Spark, GraphFrames and Jupyter. More soon....
 
