@@ -32,7 +32,7 @@ winlogbeat.exe -e
 Producers send data directly to the broker that is the leader for the partition without any intervening routing tier. To help the producer do this all Kafka nodes can answer a request for metadata about which servers are alive and where the leaders for the partitions of a topic are at any given time to allow the producer to appropriately direct its requests.
 
 ## Kafka Cluster (Brokers)
-HELK uses a kafka custer conformed of 3 brokers. Each broker has its own ID number and topic log partitions. Connecting to one broker bootstraps a client to the entire Kafka cluster.
+HELK uses a kafka cluster conformed of 3 brokers. Each broker has its own ID number and topic log partitions. Connecting to one broker bootstraps a client to the entire Kafka cluster.
 
 Each HELK broker has the following custom configurations:
 
