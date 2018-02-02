@@ -1,5 +1,5 @@
 # Design
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KAFKA_Design.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KAFKA-Design.png]]
 
 # Kafka Ecosystem
 ## Producers
@@ -26,8 +26,8 @@ You can check how your logs are being sent to the HELK by running the following 
 ```
 winlogbeat.exe -e
 ```
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KAFKA_producer1.png]]
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KAFKA_producer2.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KAFKA-producer1.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KAFKA-producer2.png]]
 
 Producers send data directly to the broker that is the leader for the partition without any intervening routing tier. To help the producer do this all Kafka nodes can answer a request for metadata about which servers are alive and where the leaders for the partitions of a topic are at any given time to allow the producer to appropriately direct its requests.
 
