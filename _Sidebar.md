@@ -1,4 +1,4 @@
-* [Home](https://github.com/Cyb3rWard0g/HELK/wiki)
+* [Introduction](https://github.com/Cyb3rWard0g/HELK/wiki)
 * [Architecture Overview](https://github.com/Cyb3rWard0g/HELK/wiki/Architecture-Overview)
   * [Kafka](https://github.com/Cyb3rWard0g/HELK/wiki/Kafka)
   * [Logstash](https://github.com/Cyb3rWard0g/HELK/wiki/Logstash)
