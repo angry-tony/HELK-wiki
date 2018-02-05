@@ -5,3 +5,4 @@
   * [Elasticsearch](https://github.com/Cyb3rWard0g/HELK/wiki/Elasticsearch)
   * [Kibana](https://github.com/Cyb3rWard0g/HELK/wiki/Kibana)
   * [Spark](https://github.com/Cyb3rWard0g/HELK/wiki/Spark)
+* [Installation](https://github.com/Cyb3rWard0g/HELK/wiki/Installation)
