@@ -120,7 +120,7 @@ I also recommend to monitor your Docker logs (available on the host and not insi
 sudo docker logs helk
 ```
 # Final Details
-Once your HELK installation ends, you will get presented with information that you will need to access the HELK and all its features. If you install the HELK via Docker, you will have the Jupyter Notebook server running and Spark ready to be used. You will have the following message showing in your main screen:
+Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. If you install the HELK via Docker, you will have the Jupyter Notebook server running and Spark ready to be used. You will have the following message showing in your main screen:
 ```
 ***********************************************************************************
 ** [HELK-INSTALLATION-INFO] YOUR HELK IS READY                                   **
