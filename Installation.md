@@ -161,10 +161,14 @@ One of the questions that I had recently is why the Spark UI is not available af
 That tells you that the Jupyter Server is running, but it does not mean that the Jupyter Kernel has been started yet. Therefore, a Spark driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first and use your token.
 
 Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That is defined in your **HELK JUPYTER NOTEBOOK URI:** message. It is basically your HELK's IP and port 8880
+
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-Token.png]]
 
+
 Open the **Check_Spark_Graphframes_Integrations.ipynb** notebook
+
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-Tree.png]]
+
 
 Once you access the notebook, you will see a message on the top right of your notebook saying that the **Kernel is starting,Please Wait..**
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-InitializeKernel.png]]
@@ -208,5 +212,6 @@ downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.7/slf4j-api-1
 	|      default     |   5   |   5   |   5   |   0   ||   5   |   5   |
 	---------------------------------------------------------------------
 ```
-You can see **graphframes** being downloaded and spark being initialized. Now if you go to your Spark UI (HELK's IP and port 4040), you will see that Spark UI is running. You will see that one of the first messages is **"Execution driver added"** 
+You can see **graphframes** being downloaded and spark being initialized. Now if you go to your Spark UI (HELK's IP and port 4040), you will see that Spark UI is running. You will see that one of the first messages is **"Execution driver added"**
+
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-UI.png]]
