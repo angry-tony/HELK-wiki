@@ -120,7 +120,7 @@ I also recommend to monitor your Docker logs (available on the host and not insi
 sudo docker logs helk
 ```
 # Final Details
-Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. If you install the HELK via Docker, you will have the Jupyter Notebook server running and Spark ready to be used. You will have the following message showing in your main screen:
+Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. If you install the HELK via Docker, you will have the Jupyter Notebook server running and ready to be used. **You will still need to access the Jupyter web interface and access/create a notebook in order to initialize Spark. This is because HELK uses PYSPARK and it depends on Jupyter Notebooks**.  You will have the following message showing in your main screen:
 ```
 ***********************************************************************************
 ** [HELK-INSTALLATION-INFO] YOUR HELK IS READY                                   **
@@ -137,8 +137,8 @@ HELK DOCKER BASH ACCESS: sudo docker exec -ti helk bash
  
 IT IS HUNTING SEASON!!!!!
 ```
-If you are installing the HELK via its own bash script, you will get the same message, but with a different **HELK JUPYTER CURRENT TOKEN** message and without the **HELK DOCKER BASH ACCESS** line of course.
+If you are installing the HELK via its own bash script, you will get a similar message, but with a different **HELK JUPYTER CURRENT TOKEN** value and without the **HELK DOCKER BASH ACCESS** line of course. You will get something like this:
 ```
 HELK JUPYTER CURRENT TOKEN: First, run the following: source ~/.bashrc && pyspark
 ```
-It is important to remember that you can still run your HELK with all the ELK functionality even if you do not run those commands. Those commands are to start the Jupyter Server and Spark functionalities. After that, you will get your **JUPYTER TOKEN** and you will be able to access the Jupyter Notebook web interface.
+It is important to remember that you can still run your HELK with all the ELK functionality even if you do not run those commands. Those commands are to start the Jupyter Server. After that, you will get your **JUPYTER TOKEN** and you will be able to access the Jupyter Notebook web interface.
