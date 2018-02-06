@@ -144,7 +144,7 @@ HELK JUPYTER CURRENT TOKEN: First, run the following: source ~/.bashrc && pyspar
 It is important to remember that you can still run your HELK with all the ELK functionality even if you do not run those commands. Those commands are to start the Jupyter Server. After that, you will get your **JUPYTER TOKEN** and you will be able to access the Jupyter Notebook web interface.
 
 # Starting Jupyter Kernel & Spark UI
-One of the questions that I had recently is why the Spark UI is not available after installation. This is because the HELK uses PYSPARK  (Python API) to interact with Spark and it depends on Jupyter's Kernel being initialized. When the installation of the HELK is done, if you check your **Docker Logs** you will see the following message in the last lines right before Logstash starts successfuly:
+One of the questions that I had recently was **why the Spark UI is not available after installation**. This is because the HELK uses PYSPARK  (Python API) to interact with Spark and it depends on Jupyter's Kernel being initialized. When the installation of the HELK is done, if you check your **Docker Logs** you will see the following message in the last lines right before Logstash starts successfully:
 ```
 [I 12:23:37.462 NotebookApp] Serving notebooks from local directory: /opt/helk/scripts
 [I 12:23:37.463 NotebookApp] 0 active kernels
@@ -158,9 +158,9 @@ One of the questions that I had recently is why the Spark UI is not available af
         http://localhost:8880/?token=8be5c57adc5cc4a25a1d95b56d1e46ed0d559ec67706881d
 [I 12:23:37.575 NotebookApp] 302 GET / (172.17.0.1) 5.41ms
 ```
-That tells you that the Jupyter Server is running, but it does not mean that the Jupyter Kernel has been started yet. Therefore, a Spark driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first and use your token.
+That tells you that the Jupyter Server is running, but it does not have active kernel yet. Therefore, a Spark execution driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first and use your token.
 
-Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That is defined in your **HELK JUPYTER NOTEBOOK URI:** message. It is basically your HELK's IP and port 8880
+Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That Jupyter URL is defined in your **HELK JUPYTER NOTEBOOK URI:** message. It is basically your HELK's IP and port 8880
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-Token.png]]
 
@@ -174,7 +174,7 @@ Once you access the notebook, you will see a message on the top right of your no
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-InitializeKernel.png]]
 
-If you check your Docker logs you will see the following
+If you check your Docker logs you will see the following:
 ```
 [I 12:35:47.738 NotebookApp] Kernel started: 36c41595-2bc9-412f-b841-c113921e8371
 Ivy Default Cache set to: /root/.ivy2/cache
@@ -213,6 +213,8 @@ downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.7/slf4j-api-1
 	|      default     |   5   |   5   |   5   |   0   ||   5   |   5   |
 	---------------------------------------------------------------------
 ```
-You can see **graphframes** being downloaded and spark being initialized. Now if you go to your Spark UI (HELK's IP and port 4040), you will see that Spark UI is running. You will see that one of the first messages is **"Execution driver added"**
+You can see **graphframes** being downloaded and spark being initialized. Now, if you go to your Spark UI (HELK's IP and port 4040), you will see that the Spark UI is running. You will see that one of the first messages is **"Execution driver added"**
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-UI.png]]
+
+IT IS HUNTING SEASON!!
