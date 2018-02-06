@@ -213,7 +213,7 @@ downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.7/slf4j-api-1
 	|      default     |   5   |   5   |   5   |   0   ||   5   |   5   |
 	---------------------------------------------------------------------
 ```
-You can see **graphframes** being downloaded and spark being initialized. Now, if you go to your Spark UI (HELK's IP and port 4040), you will see that the Spark UI is running. You will see that one of the first messages is **"Execution driver added"**
+You can see **graphframes** being downloaded and spark being initialized. Now, if you go to your Spark UI (HELK's IP and port 4040), you will see that the Spark UI is running. You will see that one of the first messages is **"Executor driver added"**
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-UI.png]]
 
