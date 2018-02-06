@@ -171,6 +171,7 @@ Open the **Check_Spark_Graphframes_Integrations.ipynb** notebook
 
 
 Once you access the notebook, you will see a message on the top right of your notebook saying that the **Kernel is starting,Please Wait..**
+
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-InitializeKernel.png]]
 
 If you check your Docker logs you will see the following
