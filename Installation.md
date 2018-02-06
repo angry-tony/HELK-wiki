@@ -142,3 +142,71 @@ If you are installing the HELK via its own bash script, you will get a similar m
 HELK JUPYTER CURRENT TOKEN: First, run the following: source ~/.bashrc && pyspark
 ```
 It is important to remember that you can still run your HELK with all the ELK functionality even if you do not run those commands. Those commands are to start the Jupyter Server. After that, you will get your **JUPYTER TOKEN** and you will be able to access the Jupyter Notebook web interface.
+
+# Starting Jupyter Kernel & Spark UI
+One of the questions that I had recently is why the Spark UI is not available after installation. This is because the HELK uses PYSPARK  (Python API) to interact with Spark and it depends on Jupyter's Kernel being initialized. When the installation of the HELK is done, if you check your **Docker Logs** you will see the following message in the last lines right before Logstash starts successfuly:
+```
+[I 12:23:37.462 NotebookApp] Serving notebooks from local directory: /opt/helk/scripts
+[I 12:23:37.463 NotebookApp] 0 active kernels
+[I 12:23:37.463 NotebookApp] The Jupyter Notebook is running at:
+[I 12:23:37.463 NotebookApp] http://[all ip addresses on your system]:8880/?token=8be5c57adc5cc4a25a1d95b56d1e46ed0d559ec67706881d
+[I 12:23:37.463 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 12:23:37.463 NotebookApp] 
+    
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://localhost:8880/?token=8be5c57adc5cc4a25a1d95b56d1e46ed0d559ec67706881d
+[I 12:23:37.575 NotebookApp] 302 GET / (172.17.0.1) 5.41ms
+```
+That tells you that the Jupyter Server is running, but it does not mean that the Jupyter Kernel has been started yet. Therefore, a Spark driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first and use your token.
+
+Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That is defined in your **HELK JUPYTER NOTEBOOK URI:** message. It is basically your HELK's IP and port 8880
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-Token.png]]
+
+Open the **Check_Spark_Graphframes_Integrations.ipynb** notebook
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-Tree.png]]
+
+Once you access the notebook, you will see a message on the top right of your notebook saying that the **Kernel is starting,Please Wait..**
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/JUPYTER-InitializeKernel.png]]
+
+If you check your Docker logs you will see the following
+```
+[I 12:35:47.738 NotebookApp] Kernel started: 36c41595-2bc9-412f-b841-c113921e8371
+Ivy Default Cache set to: /root/.ivy2/cache
+The jars for the packages stored in: /root/.ivy2/jars
+:: loading settings :: url = jar:file:/opt/helk/spark/spark-2.2.1-bin-hadoop2.7/jars/ivy-2.4.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
+graphframes#graphframes added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent;1.0
+	confs: [default]
+	found graphframes#graphframes;0.5.0-spark2.1-s_2.11 in spark-packages
+	found com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2 in central
+	found com.typesafe.scala-logging#scala-logging-slf4j_2.11;2.1.2 in central
+	found org.scala-lang#scala-reflect;2.11.0 in central
+	found org.slf4j#slf4j-api;1.7.7 in central
+downloading http://dl.bintray.com/spark-packages/maven/graphframes/graphframes/0.5.0-spark2.1-s_2.11/graphframes-0.5.0-spark2.1-s_2.11.jar ...
+	[SUCCESSFUL ] graphframes#graphframes;0.5.0-spark2.1-s_2.11!graphframes.jar (722ms)
+downloading https://repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging-api_2.11/2.1.2/scala-logging-api_2.11-2.1.2.jar ...
+	[SUCCESSFUL ] com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2!scala-logging-api_2.11.jar (60ms)
+downloading https://repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging-slf4j_2.11/2.1.2/scala-logging-slf4j_2.11-2.1.2.jar ...
+	[SUCCESSFUL ] com.typesafe.scala-logging#scala-logging-slf4j_2.11;2.1.2!scala-logging-slf4j_2.11.jar (91ms)
+downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.0/scala-reflect-2.11.0.jar ...
+[W 12:35:57.858 NotebookApp] Timeout waiting for kernel_info reply from 36c41595-2bc9-412f-b841-c113921e8371
+	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.0!scala-reflect.jar (2260ms)
+downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar ...
+	[SUCCESSFUL ] org.slf4j#slf4j-api;1.7.7!slf4j-api.jar (88ms)
+:: resolution report :: resolve 4606ms :: artifacts dl 3248ms
+	:: modules in use:
+	com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2 from central in [default]
+	com.typesafe.scala-logging#scala-logging-slf4j_2.11;2.1.2 from central in [default]
+	graphframes#graphframes;0.5.0-spark2.1-s_2.11 from spark-packages in [default]
+	org.scala-lang#scala-reflect;2.11.0 from central in [default]
+	org.slf4j#slf4j-api;1.7.7 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   5   |   5   |   5   |   0   ||   5   |   5   |
+	---------------------------------------------------------------------
+```
+You can see **graphframes** being downloaded and spark being initialized. Now if you go to your Spark UI (HELK's IP and port 4040), you will see that Spark UI is running. You will see that one of the first messages is **"Execution driver added"** 
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-UI.png]]
