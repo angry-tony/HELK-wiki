@@ -3,18 +3,27 @@
 
 # Kafka Ecosystem
 ## Producers
-Producers publish data to the topics of their choice. The producer is responsible for choosing which record to assign to which partition within the topic.[Kafka](http://kafka.apache.org/documentation.html#producerapi) HELK currently works with machines (producers) running Winlogbeat as their log shipper. 
+Producers publish data to the topics of their choice. The producer is responsible for choosing which record to assign to which partition within the topic.[Kafka](http://kafka.apache.org/documentation.html#producerapi) HELK currently works with machines (producers) running Winlogbeat as their log shipper. Most labs might have **Winlogbeat** installed on all the endpoints and sending data to the HELK directly. However, it is recommended, for scalability reasons, to use WEF servers to collect your windows logs first. Then, you can have Winlogbeat or NXlog installed on your WEF servers to ship the logs to your HELK. **Using WEF servers has not been tested yet with the HELK. This is coming soon..!**
 
 The following Winlogbeat config is recommended:
 ```
 winlogbeat.event_logs:
   - name: Application
-    ignore_older: 72h
+    ignore_older: 30m
   - name: Security
+    ignore_older: 30m
   - name: System
+    ignore_older: 30m
   - name: Microsoft-windows-sysmon/operational
+    ignore_older: 30m
   - name: Microsoft-windows-PowerShell/Operational
+    ignore_older: 30m
     event_id: 4103, 4104
+  - name: Windows PowerShell
+    event_id: 400,600
+    ignore_older: 30m
+  - name: Microsoft-Windows-WMI-Activity/Operational
+    event_id: 5857,5858,5859,5860,5861
 
 output.kafka:
   hosts: ["<HELK-IP>:9092","<HELK-IP>:9093","<HELK-IP>:9094"]
