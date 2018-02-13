@@ -147,7 +147,7 @@ Use the **JUPYTER CURRENT TOKEN** to access the Jupyter Notebook web interface.
 # Starting Jupyter Kernel & Spark UI
 One of the questions that I had recently was **why the Spark UI is not available after installation**. This is because the HELK uses PYSPARK  (Python API) to interact with Spark and it depends on Jupyter's Kernel being initialized. When the installation of the HELK is done, if you check your **Docker Logs** (sudo docker logs helk) or the log **/var/log/spark/spark_pyspark.log**, you will see the following message:
 ```
-[I 12:23:37.462 NotebookApp] Serving notebooks from local directory: /opt/helk/scripts
+[I 12:23:37.462 NotebookApp] Serving notebooks from local directory: /opt/helk/
 [I 12:23:37.463 NotebookApp] 0 active kernels
 [I 12:23:37.463 NotebookApp] The Jupyter Notebook is running at:
 [I 12:23:37.463 NotebookApp] http://[all ip addresses on your system]:8880/?token=8be5c57adc5cc4a25a1d95b56d1e46ed0d559ec67706881d
