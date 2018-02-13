@@ -112,13 +112,22 @@ Other logs that you should monitor also to see if everything is running properly
   * /var/log/logstash/logstash-plain.log
 * **Kibana:**
   * /var/log/kibana/kibana.log
+* **Spark:**
+  * /var/log/spark/spark_pyspark.log
+* **Cerebro:**
+  * /var/log/cerebro/cerebro.log
+* **Kafka:**
+  * /var/log/kafka/helk-kafka_zookeeper.log
+  * /var/log/kafka/helk-kafka.log
+  * /var/log/kafka/helk-kafka_1.log
+  * /var/log/kafka/helk-kafka_2.log
 
 If you are using Docker to deploy your HELK, remember that the ELK logs are available inside of your docker image. You can access your docker image by running the following commands:
 ```
 sudo docker exec -ti helk bash
 root@7a9d6443a4bf:/opt/helk/scripts# 
 ```
-I also recommend to monitor your Docker logs (available on the host and not inside of the Docker image). This will allow you to see the execution of the [helk_docker_entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/scripts/helk_docker_entrypoint.sh) bash script once the the docker image is run during the installation. Run the following commands:
+I also recommend to monitor your **Docker logs**. The **"Docker logs"** command batch-retrieves logs present at the time of execution. This will allow you, for example, to see the execution of the [helk_docker_entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/scripts/helk_docker_entrypoint.sh) bash script once the the docker image is run during the installation. Run the following commands:
 ```
 sudo docker logs helk
 ```
@@ -236,6 +245,8 @@ You can see **graphframes** being downloaded and spark being initialized. Now, i
 Open your preferred browser, go to your HELK's IP address, and enter the HELK credentials **(helk:hunting)**. By default, you will be presented by the Kibana's Home page. Once there, you could explore the different features that Kibana provides. I personally like to check the **Index Patterns** first and then **Discovery**
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-Home.png]]
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-IndexPatterns.png]]
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-Discovery.png]]
 
