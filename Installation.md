@@ -177,15 +177,16 @@ Once you access the notebook, you will see a message on the top right of your no
 
 If you check your Docker logs you will see the following:
 ```
-[I 06:54:52.610 NotebookApp] Kernel started: 659e730a-cbb1-4f33-b016-d54be6f09a11
+[I 15:25:32.762 NotebookApp] Kernel started: eeb1b4f7-47ba-4d7a-9faf-512c5bc3f161
 Ivy Default Cache set to: /root/.ivy2/cache
 The jars for the packages stored in: /root/.ivy2/jars
 :: loading settings :: url = jar:file:/opt/helk/spark/spark-2.2.1-bin-hadoop2.7/jars/ivy-2.4.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
 graphframes#graphframes added as a dependency
 org.apache.spark#spark-sql-kafka-0-10_2.11 added as a dependency
+databricks#spark-sklearn added as a dependency
 :: resolving dependencies :: org.apache.spark#spark-submit-parent;1.0
 	confs: [default]
-[W 06:55:03.128 NotebookApp] Timeout waiting for kernel_info reply from 659e730a-cbb1-4f33-b016-d54be6f09a11
+[W 15:25:42.980 NotebookApp] Timeout waiting for kernel_info reply from eeb1b4f7-47ba-4d7a-9faf-512c5bc3f161
 	found graphframes#graphframes;0.5.0-spark2.1-s_2.11 in spark-packages
 	found com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2 in central
 	found com.typesafe.scala-logging#scala-logging-slf4j_2.11;2.1.2 in central
@@ -198,32 +199,17 @@ org.apache.spark#spark-sql-kafka-0-10_2.11 added as a dependency
 	found org.slf4j#slf4j-api;1.7.16 in central
 	found org.apache.spark#spark-tags_2.11;2.2.1 in central
 	found org.spark-project.spark#unused;1.0.0 in central
+	found databricks#spark-sklearn;0.2.3 in spark-packages
 downloading http://dl.bintray.com/spark-packages/maven/graphframes/graphframes/0.5.0-spark2.1-s_2.11/graphframes-0.5.0-spark2.1-s_2.11.jar ...
-	[SUCCESSFUL ] graphframes#graphframes;0.5.0-spark2.1-s_2.11!graphframes.jar (519ms)
+	[SUCCESSFUL ] graphframes#graphframes;0.5.0-spark2.1-s_2.11!graphframes.jar (7939ms)
 downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.11/2.2.1/spark-sql-kafka-0-10_2.11-2.2.1.jar ...
-	[SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.11;2.2.1!spark-sql-kafka-0-10_2.11.jar (272ms)
-downloading https://repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging-api_2.11/2.1.2/scala-logging-api_2.11-2.1.2.jar ...
-	[SUCCESSFUL ] com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2!scala-logging-api_2.11.jar (35ms)
-downloading https://repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging-slf4j_2.11/2.1.2/scala-logging-slf4j_2.11-2.1.2.jar ...
-	[SUCCESSFUL ] com.typesafe.scala-logging#scala-logging-slf4j_2.11;2.1.2!scala-logging-slf4j_2.11.jar (39ms)
-downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.0/scala-reflect-2.11.0.jar ...
-	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.0!scala-reflect.jar (2564ms)
-downloading https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/0.10.0.1/kafka-clients-0.10.0.1.jar ...
-	[SUCCESSFUL ] org.apache.kafka#kafka-clients;0.10.0.1!kafka-clients.jar (434ms)
-downloading https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.11/2.2.1/spark-tags_2.11-2.2.1.jar ...
-	[SUCCESSFUL ] org.apache.spark#spark-tags_2.11;2.2.1!spark-tags_2.11.jar (31ms)
-downloading https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.jar ...
-	[SUCCESSFUL ] org.spark-project.spark#unused;1.0.0!unused.jar (25ms)
-downloading https://repo1.maven.org/maven2/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar ...
-	[SUCCESSFUL ] net.jpountz.lz4#lz4;1.3.0!lz4.jar (150ms)
-downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar ...
-	[SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.2.6!snappy-java.jar(bundle) (602ms)
-downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.16/slf4j-api-1.7.16.jar ...
-	[SUCCESSFUL ] org.slf4j#slf4j-api;1.7.16!slf4j-api.jar (41ms)
-:: resolution report :: resolve 6350ms :: artifacts dl 4739ms
+	[SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.11;2.2.1!spark-sql-kafka-0-10_2.11.jar (318ms)
+...
+.....
 	:: modules in use:
 	com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2 from central in [default]
 	com.typesafe.scala-logging#scala-logging-slf4j_2.11;2.1.2 from central in [default]
+	databricks#spark-sklearn;0.2.3 from spark-packages in [default]
 	graphframes#graphframes;0.5.0-spark2.1-s_2.11 from spark-packages in [default]
 	net.jpountz.lz4#lz4;1.3.0 from central in [default]
 	org.apache.kafka#kafka-clients;0.10.0.1 from central in [default]
@@ -239,11 +225,21 @@ downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.16/slf4j-api-
 	|                  |            modules            ||   artifacts   |
 	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
 	---------------------------------------------------------------------
-	|      default     |   12  |   12  |   12  |   1   ||   11  |   11  |
+	|      default     |   13  |   13  |   13  |   1   ||   12  |   12  |
 	---------------------------------------------------------------------
 ```
 You can see **graphframes** being downloaded and spark being initialized. Now, if you go to your Spark UI (HELK's IP and port 4040), you will see that the Spark UI is running. You will see that one of the first messages is **"Executor driver added"**
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-UI.png]]
+
+# Access HELK Web Interface
+Open your preferred browser, go to your HELK's IP address, and enter the HELK credentials **(helk:hunting)**. By default, you will be presented by the Kibana's Home page. Once there, you could explore the different features that Kibana provides. I personally like to check the **Index Patterns** first and then **Discovery**
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-Home.png]]
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-Discovery.png]]
+
+
+I hope this document was helpful to deploy your own HELK. Let us know if you have any questions or if you think that this document can be improved. Feel free to create an **issue** for updates to this procedure. A more detailed **HOW-TO** will be developed soon to go into more details of how to use all the HELK components. 
 
 IT IS HUNTING SEASON!!
