@@ -159,7 +159,7 @@ One of the questions that I had recently was **why the Spark UI is not available
         http://localhost:8880/?token=8be5c57adc5cc4a25a1d95b56d1e46ed0d559ec67706881d
 [I 12:23:37.575 NotebookApp] 302 GET / (172.17.0.1) 5.41ms
 ```
-That tells you that the Jupyter Server is running, but it does not have an active kernel yet. Therefore, a Spark execution driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first using your **Jupyter token**.
+That tells you that the Jupyter Server is running, but it does not have an active kernel yet. Therefore, a **Spark executor driver** has not being assigned yet. Also, you will see a **302** message in the spark logs, and that is fine because you still need to access the Jupyter web interface using your **Jupyter token**.
 
 Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That Jupyter URL is defined in your **HELK JUPYTER NOTEBOOK URI:** message. It is basically your HELK's IP and port 8880
 
