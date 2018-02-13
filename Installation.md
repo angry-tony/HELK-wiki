@@ -51,7 +51,7 @@ Once you choose how you want to install the HELK, it will start showing you pre-
 **                                          **
 ** Author: Roberto Rodriguez (@Cyb3rWard0g) **
 ** HELK build version: 0.9 (Alpha)          **
-** HELK ELK version: 6.1.3                  **
+** HELK ELK version: 6.2.0                  **
 ** License: BSD 3-Clause                    **
 **********************************************
  
@@ -61,6 +61,9 @@ Once you choose how you want to install the HELK, it will start showing you pre-
 4. Exit
  
 [HELK-INSTALLATION-INFO] Enter choice [ 1 - 4] 2
+[HELK-INSTALLATION-INFO] Obtaining current host IP..
+[HELK-INSTALLATION-INFO] Set HELK IP. Default value is your current IP: 192.168.64.131
+[HELK-INSTALLATION-INFO] HELK IP set to 192.168.64.131
 [HELK-DOCKER-INSTALLATION-INFO] HELK identified Linux as the system kernel
 [HELK-DOCKER-INSTALLATION-INFO] Checking distribution list and version
 [HELK-DOCKER-INSTALLATION-INFO] You're using ubuntu version xenial
@@ -120,7 +123,7 @@ I also recommend to monitor your Docker logs (available on the host and not insi
 sudo docker logs helk
 ```
 # Final Details
-Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. If you install the HELK via Docker, you will have the Jupyter Notebook server running and ready to be used. **You will still need to access the Jupyter web interface and access/create a notebook in order to initialize Spark. This is because HELK uses PYSPARK and it depends on Jupyter Notebooks**.  You will have the following message showing in your main screen:
+Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. Either you install the HELK via Docker or local bash sccript, you will have the Jupyter Notebook server running and ready to be used. **You will still need to access the Jupyter web interface and access/create a notebook in order to initialize Spark. This is because HELK uses PYSPARK and it depends on Jupyter Notebooks**.  You will have the following message showing in your main screen:
 ```
 ***********************************************************************************
 ** [HELK-INSTALLATION-INFO] YOUR HELK IS READY                                   **
@@ -128,23 +131,21 @@ Once your HELK installation ends, you will be presented with information that yo
 ***********************************************************************************
  
 HELK KIBANA URL: http://192.168.64.131
-HELK KIBANA USER: helk
-HELK KIBANA PASSWORD: hunting
-HELK JUPYTER CURRENT TOKEN: 8dc4ea6610a7b893055120f4812a0770a60805ba6fa8dd69
+HELK ELASTICSEARCH EXTERNAL URL: http://192.168.64.131:8082
+HELK CEREBRO URL: http://192.168.64.131:9000
+HELK KIBANA & ELASTICSEARCH USER: helk
+HELK KIBANA & ELASTICSEARCH PASSWORD: hunting
+HELK JUPYTER CURRENT TOKEN: b5b4e1879177b1d6180cebcfb24cc5c777b19c92b7661061
 HELK SPARK UI: http://192.168.64.131:4040
 HELK JUPYTER NOTEBOOK URI: http://192.168.64.131:8880
 HELK DOCKER BASH ACCESS: sudo docker exec -ti helk bash
  
 IT IS HUNTING SEASON!!!!!
 ```
-If you are installing the HELK via its own bash script, you will get a similar message, but with a different **HELK JUPYTER CURRENT TOKEN** value and without the **HELK DOCKER BASH ACCESS** line of course. You will get something like this:
-```
-HELK JUPYTER CURRENT TOKEN: First, run the following: source ~/.bashrc && pyspark
-```
-It is important to remember that you can still run your HELK with all the ELK functionality even if you do not run those commands. Those commands are to start the Jupyter Server. After that, you will get your **JUPYTER TOKEN** and you will be able to access the Jupyter Notebook web interface.
+Use the **JUPYTER TOKEN** to access the Jupyter Notebook web interface.
 
 # Starting Jupyter Kernel & Spark UI
-One of the questions that I had recently was **why the Spark UI is not available after installation**. This is because the HELK uses PYSPARK  (Python API) to interact with Spark and it depends on Jupyter's Kernel being initialized. When the installation of the HELK is done, if you check your **Docker Logs** you will see the following message in the last lines right before Logstash starts successfully:
+One of the questions that I had recently was **why the Spark UI is not available after installation**. This is because the HELK uses PYSPARK  (Python API) to interact with Spark and it depends on Jupyter's Kernel being initialized. When the installation of the HELK is done, if you check your **Docker Logs** (sudo docker logs helk) or **/var/log/spark/spark_pyspark.log** you will see the following message:
 ```
 [I 12:23:37.462 NotebookApp] Serving notebooks from local directory: /opt/helk/scripts
 [I 12:23:37.463 NotebookApp] 0 active kernels
@@ -158,7 +159,7 @@ One of the questions that I had recently was **why the Spark UI is not available
         http://localhost:8880/?token=8be5c57adc5cc4a25a1d95b56d1e46ed0d559ec67706881d
 [I 12:23:37.575 NotebookApp] 302 GET / (172.17.0.1) 5.41ms
 ```
-That tells you that the Jupyter Server is running, but it does not have active kernel yet. Therefore, a Spark execution driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first and use your token.
+That tells you that the Jupyter Server is running, but it does not have an active kernel yet. Therefore, a Spark execution driver has not being assigned yet. Also, you will see a **302** message, and that is fine because you need to access the Jupyter web interface first using your **Jupyter token**.
 
 Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That Jupyter URL is defined in your **HELK JUPYTER NOTEBOOK URI:** message. It is basically your HELK's IP and port 8880
 
