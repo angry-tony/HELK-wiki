@@ -22,7 +22,7 @@ cd HELK/
 sudo ./helk_install.sh
 ```
 # HELK Menu
-In order to make the installation of the HELK easy for everyone, the project comes with a menu where all you have to do is choose how you want to install the HELK. Just pick the option that you want to use, and it will do it all for you.
+In order to make the installation of the HELK easy for everyone, the project comes with a menu where all you have to do is choose how you want to install the HELK. Just pick the option that you want to use, and it will do it all for you. You will just have to confirm that you want to use your HOST IP address for the HELK, unless you want to use a different one. Press \[Return\] or let the script continue on its own (30 Seconds sleep).
 * **Option 1:** Pulls and runs the latest HELK Docker image from [Cyb3rWard0g Docker Hub](https://hub.docker.com/r/cyb3rward0g/helk/).
 * **Option 2:** Builds and runs the HELK from its local Dockerfile.
 * **Option 3:** Installs and runs the HELK from its local Bash Script.
