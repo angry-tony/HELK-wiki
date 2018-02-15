@@ -22,6 +22,17 @@ HELK integrates the Jupyter Notebook project with Spark via the **PYSPARK_DRIVER
 ```
 "notebook --NotebookApp.open_browser=False --NotebookApp.ip='*' --NotebookApp.port=8880 --allow-root"
 ```
+# Test Spark, GraphFrames & Jupyter Integration
+By default, the Jupyter server gets started automatically after installing the HELK.
+* Access the Jupyter Server: 
+	* Go to your <HELK's IP>:8880 in your preferred browser
+	* Enter the token provided after installing the HELK
+* Go to the training/jupyter_notebooks/getting_started/ folder
+* Open the Check_Spark_Graphframes_Integrations notebook
+	* Check the saved output (Make sure that you have Sysmon & Windows Security event logs being sent to your HELK. Otherwise you will get errors in your Jupyter Notebook when trying to replicate the basic commands)
+	* Clear the output from the notebook and run everything again
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/HELK_checking_integrations.png]]
 
 # Other Python Packages
 ## OTXv2
