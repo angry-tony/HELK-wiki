@@ -19,7 +19,7 @@ Currently, HELK creates automatically 7 index patterns for you and sets **logs-e
 * "logs-endpoint-winevent-powershell-*"
 * "logs-endpoint-winevent-wmiactivity-*"
 
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-Discover.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-Discovery.png]]
 
 # Dashboards
 Currently, the HELK comes with 3 dashboards:
@@ -27,4 +27,4 @@ Currently, the HELK comes with 3 dashboards:
 * Network_Dashboard
 * Sysmon_Dashboard
 
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-NetworkDashboard.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-NetworkDasboard.png]]
