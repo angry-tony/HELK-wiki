@@ -58,3 +58,13 @@ Each HELK broker has the following custom configurations:
 
 ## Zookeeper
 Kafka needs ZooKeeper to work efficiently in the cluster. Kafka uses Zookeeper to do leadership election of Kafka Broker and Topic Partition pairs. Kafka uses Zookeeper to manage service discovery for Kafka Brokers that form the cluster. Zookeeper sends changes of the topology to Kafka, so each node in the cluster knows when a new broker joined, a Broker died, a topic was removed or a topic was added, etc. Zookeeper provides an in-sync view of Kafka Cluster configuration.[Cloudurable](http://cloudurable.com/blog/kafka-architecture/index.html)
+
+## Are you receiving logs from producers?
+You can confirm that you are ingesting logs to your Kafka brokers by running the following commands:
+```
+sudo /opt/helk/kafka/kafka_2.11-1.0.0/bin/kafka-console-consumer.sh --bootstrap-server 192.168.64.131:9092 --topic winlogbeat --from-beginning
+``
+If you are running your HELK as a Docker container make sure you are inside of the container before running that command. You can access your container by running the following:
+```
+sudo docker exec -ti helk bash
+```
