@@ -63,7 +63,7 @@ Kafka needs ZooKeeper to work efficiently in the cluster. Kafka uses Zookeeper t
 You can confirm that you are ingesting logs to your Kafka brokers by running the following commands:
 ```
 sudo /opt/helk/kafka/kafka_2.11-1.0.0/bin/kafka-console-consumer.sh --bootstrap-server 192.168.64.131:9092 --topic winlogbeat --from-beginning
-``
+```
 If you are running your HELK as a Docker container make sure you are inside of the container before running that command. You can access your container by running the following:
 ```
 sudo docker exec -ti helk bash
