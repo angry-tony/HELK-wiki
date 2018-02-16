@@ -32,7 +32,7 @@ In order to make the installation of the HELK easy for everyone, the project com
 **                                          **
 ** Author: Roberto Rodriguez (@Cyb3rWard0g) **
 ** HELK build version: 0.9 (Alpha)          **
-** HELK ELK version: 6.1.3                  **
+** HELK ELK version: 6.2.0                  **
 ** License: BSD 3-Clause                    **
 **********************************************
  
