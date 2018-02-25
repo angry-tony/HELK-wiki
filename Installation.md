@@ -70,8 +70,8 @@ Once the installation kicks in, it will start showing you pre-defined messages a
 ```
 What I recommend to do all the time is to open another shell and monitor the HELK installation logs by using the **tail** command and pointing it to the **/var/log/helk-install.log** file. This log file is available always on the host even if you are deploying the HELK via Docker.
 ```
-helk@HELK:~$ tail -f /var/log/helk-install.log
-# Executing docker install script, commit: 1d31602
+helk@HELK:~$ tail -f /var/log/helk-install.log 
+# Executing docker install script, commit: 5f7af95
 + sh -c apt-get update -qq >/dev/null
 + sh -c apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
 + sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | apt-key add -qq - >/dev/null
@@ -80,8 +80,34 @@ helk@HELK:~$ tail -f /var/log/helk-install.log
 + sh -c apt-get update -qq >/dev/null
 + sh -c apt-get install -y -qq --no-install-recommends docker-ce >/dev/null
 + sh -c docker version
+Client:
+ Version:	18.02.0-ce
+ API version:	1.36
+ Go version:	go1.9.3
+ Git commit:	fc4de44
+ Built:	Wed Feb  7 21:16:33 2018
+ OS/Arch:	linux/amd64
+ Experimental:	false
+ Orchestrator:	swarm
+..
 ...
-....
+Creating network "helk_helk" with driver "bridge"
+Creating volume "helk_esdata" with local driver
+Pulling helk-elk (cyb3rward0g/helk-elk:6.2.2)...
+6.2.2: Pulling from cyb3rward0g/helk-elk
+Digest: sha256:05025efb6c2fc0fef2790859aa98bb28c7c20e541bdbabda6751960a5adb65c2
+Status: Downloaded newer image for cyb3rward0g/helk-elk:6.2.2
+Pulling helk-kafka (cyb3rward0g/helk-kafka:1.0.0)...
+1.0.0: Pulling from cyb3rward0g/helk-kafka
+Digest: sha256:58b9252bf43e79734c935d4fac6ac910ad25ff6aeb1db8b6e6f699ccbb08a0b7
+Status: Downloaded newer image for cyb3rward0g/helk-kafka:1.0.0
+Pulling helk-analytics (cyb3rward0g/helk-analytics:0.0.1)...
+0.0.1: Pulling from cyb3rward0g/helk-analytics
+Digest: sha256:a3995ccb75da7a5d27736e5111f6db3d6d7bfff18d1618d0d66ee62086e995e0
+Status: Downloaded newer image for cyb3rward0g/helk-analytics:0.0.1
+Creating helk-kafka ... done
+Creating helk-kafka ... 
+Creating helk-analytics ...
 ```
 Other logs that you should monitor also to see if everything is running properly after the installation are the following ones:
 * **Elasticsearch:**
