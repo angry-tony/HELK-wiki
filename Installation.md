@@ -146,7 +146,7 @@ You can also monitor your **Docker logs**. The **"Docker logs"** command batch-r
 sudo docker logs helk-elk
 ```
 # Final Details
-Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. You will also have the Jupyter Notebook server running and ready to be used. The HELK uses Jupyter Lab. **You will still need to access the Jupyter Lab web interface and access/create a notebook in order to initialize the Spark Context (This initializes the default Python Kernel). You will have the following message showing in your main screen:
+Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. You will also have the Jupyter Notebook server running and ready to be used. The HELK uses Jupyter Lab. **You will still need to access the Jupyter Lab web interface and access/create a notebook in order to initialize the Spark Context (This initializes the default Python Kernel)**. You will have the following message showing in your main screen:
 ```
 ***********************************************************************************
 ** [HELK-INSTALLATION-INFO] YOUR HELK IS READY                                   **
