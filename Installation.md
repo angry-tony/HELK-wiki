@@ -186,7 +186,7 @@ analytics started.
         http://localhost:8880/?token=3f46301da4cd20011391327647000e8006ee3574cab0b163
 [I 04:41:10.893 LabApp] 302 GET / (172.18.0.1) 5.77ms
 ```
-That tells you that the Jupyter Server is running, but it does not have an active kernel yet. Therefore, a **Spark executor driver** has not being assigned yet. Also, you will see a **302** message in the spark logs, and that is fine because you still need to access the Jupyter Lab web interface using your **Jupyter token**.
+That tells you that the Jupyter Server is running, but it does not have an active kernel yet. Therefore, a **Spark executor driver** needs to be assigned in order for Spark to start. Also, you will see a **302** message in the spark logs, and that is normal because you still need to access the Jupyter Lab web interface using your **Jupyter token**.
 
 Open your preferred browser, go to your Jupyter Interface, and enter your Jupyter token. That Jupyter URL is defined in your **HELK JUPYTER NOTEBOOK URI:** message.
 
