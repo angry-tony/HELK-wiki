@@ -2,7 +2,7 @@
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-Design.png]]
 
 # Spark Packages
-## elasticsearch-hadoop-6.2.0
+## elasticsearch-hadoop-6.2.3
 "Elasticsearch for Apache Hadoop is an open-source, stand-alone, self-contained, small library that allows Hadoop jobs (whether using Map/Reduce or libraries built upon it such as Hive, Pig or Cascading or new upcoming libraries like Apache Spark ) to interact with Elasticsearch. One can think of it as a connector that allows data to flow bi-directionaly so that applications can leverage transparently the Elasticsearch engine capabilities to significantly enrich their capabilities and increase the performance. 
 Elasticsearch-hadoop provides native integration between Elasticsearch and Apache Spark, in the form of an RDD (Resilient Distributed Dataset) (or Pair RDD to be precise) that can read data from Elasticsearch. The RDD is offered in two flavors: one for Scala (which returns the data as Tuple2 with Scala collections) and one for Java (which returns the data as Tuple2 containing java.util collections). Just like other libraries, elasticsearch-hadoop needs to be available in Spark’s classpath. As Spark has multiple deployment modes, this can translate to the target classpath, whether it is on only one node (as is the case with the local mode - which will be used through-out the documentation) or per-node depending on the desired infrastructure." [Elastic](https://www.elastic.co/guide/en/elasticsearch/hadoop/current/spark.html)
 
@@ -10,7 +10,7 @@ Elasticsearch-hadoop provides native integration between Elasticsearch and Apach
 "This is a prototype package for DataFrame-based graphs in Spark. Users can write highly expressive queries by leveraging the DataFrame API, combined with a new API for motif finding. The user also benefits from DataFrame performance optimizations within the Spark SQL engine." [SparkPackages](https://spark-packages.org/package/graphframes/graphframes)
 "It aims to provide both the functionality of GraphX and extended functionality taking advantage of Spark DataFrames. This extended functionality includes motif finding, DataFrame-based serialization, and highly expressive graph queries." [Graphframes](https://graphframes.github.io/)
 
-## org.apache.spark:spark-sql-kafka-0-10_2.11:2.2.1
+## org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0
 "Structured Streaming integration for Kafka 0.10 to poll data from Kafka" [Structured Streaming Kafka](https://spark.apache.org/docs/2.0.2/structured-streaming-kafka-integration.html)
 
 ## databricks:spark-sklearn:0.2.3
