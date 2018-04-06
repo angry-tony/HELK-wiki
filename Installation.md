@@ -6,7 +6,7 @@ Specific Linux distros or OS X supported if Docker & Docker-Compose are not inst
     * If you have Docker & Docker-Compose already installed in your system, then you should be good to go (this would skip the Docker CE Edge script execution). 
 * **Network Connection:** NAT or Bridge
 * **RAM:** 16GB (minimum)
-* *Cores:** 4 (minimum)
+* **Cores:** 4 (minimum)
 * **Applications:**
   * Docker & Docker-Compose
   * Winlogbeat running on your endpoints. You can install Winlogbeat by following one of [@Cyb3rWard0g](https://twitter.com/Cyb3rWard0g) posts [here](https://cyberwardog.blogspot.com/2017/02/setting-up-pentesting-i-mean-threat_87.html). Make sure you use the [winlogbeat config](https://github.com/Cyb3rWard0g/HELK/blob/master/winlogbeat/winlogbeat.yml) recommended by the HELK since it uses the [Kafka output plugin](https://www.elastic.co/guide/en/beats/winlogbeat/current/kafka-output.html) and it is already pointing to the right ports with recommended options. You will just have to add your HELK's IP address. 
