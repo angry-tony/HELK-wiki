@@ -129,10 +129,22 @@ Other logs that you should monitor also to see if everything is running properly
 * **Analytics**
   * /var/log/analytics/analytics.log
 
-Remember that the ELK, Kafka and Analytic logs are available inside of your docker images. You can access your docker images by running the following commands:
+Remember that the elasticsearch, logstash, kibana, nginx, Kafka and Analytic logs are available inside of your docker images. You can access your docker images by running the following commands:
 ```
-sudo docker exec -ti helk-elk bash
+sudo docker exec -ti helk-elasticsearch bash
 root@7a9d6443a4bf:/opt/helk/scripts# 
+```
+```
+sudo docker exec -ti helk-kibana bash
+root@7a9d6883a4bf:/opt/helk/scripts# 
+```
+```
+sudo docker exec -ti helk-logstash bash
+root@7a9d6773a4bf:/opt/helk/scripts# 
+```
+```
+sudo docker exec -ti helk-nginx bash
+root@7a9d6333a4bf:/opt/helk/scripts# 
 ```
 ```
 sudo docker exec -ti helk-kafka bash
@@ -142,9 +154,9 @@ root@7a9d6443a4bf:/opt/helk/scripts#
 sudo docker exec -ti helk-analytics bash
 root@7a9d6443a4bf:/opt/helk/scripts# 
 ```
-You can also monitor your **Docker logs**. The **"Docker logs"** command batch-retrieves logs present at the time of execution of the **entrypoint** scripts. This will allow you, for example, to see the execution of the [elk-entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/helk-elk/scripts/elk-entrypoint.sh) bash script once the the docker image is run. Run the following commands:
+You can also monitor your **Docker logs**. The **"Docker logs"** command batch-retrieves logs present at the time of execution of the **entrypoint** scripts. This will allow you, for example, to see the execution of the [elk-entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/helk-ellasticsearch/scripts/entrypoint.sh) bash script once the the docker image is run. Run the following commands:
 ```
-sudo docker logs helk-elk
+sudo docker logs helk-ellasticsearch
 ```
 # Final Details
 Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. You will also have the Jupyter Notebook server running and ready to be used. The HELK uses Jupyter Lab. **You will still need to access the Jupyter Lab web interface and access/create a notebook in order to initialize the Spark Context (This initializes the default Python Kernel)**. You will have the following message showing in your main screen:
