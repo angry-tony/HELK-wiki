@@ -154,7 +154,7 @@ root@7a9d6443a4bf:/opt/helk/scripts#
 sudo docker exec -ti helk-analytics bash
 root@7a9d6443a4bf:/opt/helk/scripts# 
 ```
-You can also monitor your **Docker logs**. The **"Docker logs"** command batch-retrieves logs present at the time of execution of the **entrypoint** scripts. This will allow you, for example, to see the execution of the [elk-entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/helk-ellasticsearch/scripts/entrypoint.sh) bash script once the the docker image is run. Run the following commands:
+You can also monitor your **Docker logs**. The **"Docker logs"** command batch-retrieves logs present at the time of execution of the **entrypoint** scripts. This will allow you, for example, to see the execution of the [elk-entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/helk-elasticsearch/scripts/entrypoint.sh) bash script once the the docker image is run. Run the following commands:
 ```
 sudo docker logs helk-ellasticsearch
 ```
