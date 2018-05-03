@@ -23,6 +23,7 @@ Currently, HELK creates automatically 7 index patterns for you and sets **logs-e
 
 # Dashboards
 Currently, the HELK comes with 3 dashboards:
+
 ## Global_Dashboard
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-GlobalDashboard.png]]
@@ -34,3 +35,21 @@ Currently, the HELK comes with 3 dashboards:
 ## Sysmon_Dashboard
 
 [[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-SysmonDashboard.png]]
+
+# Monitoring Views (x-Pack Basic Free License)
+
+## Kibana Initial Overview
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/MONITORING-Kibana-Overview.png]]
+
+## Elasticsearch Overview
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/MONITORING-Elasticsearch-Overview.png]]
+
+## Logstash Overview
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/MONITORING-Logstash-Overview.png]]
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/MONITORING-Logstash-Nodes-Overview.png]]
+
+
