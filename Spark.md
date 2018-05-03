@@ -43,7 +43,7 @@ By default, the Jupyter server gets started automatically after installing the H
 # Apache Arrow Integration (Convert to Pandas - Optimization)
 Apache Arrow is an in-memory columnar data format that is used in Spark to efficiently transfer data between JVM and Python processes. This currently is most beneficial to Python users that work with Pandas/NumPy data. [Apache Spark](https://spark.apache.org/docs/latest/sql-programming-guide.html#pyspark-usage-guide-for-pandas-with-apache-arrow)
 
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/Spark-ApacheArrow.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/SPARK-ApacheArrow.png]]
 
 Example from [Apache Arrow](https://arrow.apache.org/blog/2017/07/26/spark-arrow/)
 
