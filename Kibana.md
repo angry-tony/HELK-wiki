@@ -23,8 +23,14 @@ Currently, HELK creates automatically 7 index patterns for you and sets **logs-e
 
 # Dashboards
 Currently, the HELK comes with 3 dashboards:
-* Global_Dashboard
-* Network_Dashboard
-* Sysmon_Dashboard
+## Global_Dashboard
 
-[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-NetworkDasboard.png]]
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-GlobalDashboard.png]]
+
+## Network_Dashboard
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-NetworkDashboard.png]]
+
+## Sysmon_Dashboard
+
+[[https://github.com/Cyb3rWard0g/HELK/raw/master/resources/images/KIBANA-SysmonDashboard.png]]
