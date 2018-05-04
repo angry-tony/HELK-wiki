@@ -30,10 +30,12 @@ In order to make the installation of the HELK easy for everyone, the project com
 **                                          **
 ** Author: Roberto Rodriguez (@Cyb3rWard0g) **
 ** HELK build version: 0.9 (Alpha)          **
-** HELK ELK version: 6.2.2                  **
+** HELK ELK version: 6.2.4                  **
 ** License: BSD 3-Clause                    **
 **********************************************
  
+[HELK-INSTALLATION-INFO] Available Memory: 16
+[HELK-INSTALLATION-INFO] Available Disk: 60
 [HELK-INSTALLATION-INFO] Obtaining current host IP..
 [HELK-INSTALLATION-INFO] Set HELK IP. Default value is your current IP: 192.168.64.131
 [HELK-INSTALLATION-INFO] HELK IP set to 192.168.64.131
@@ -49,10 +51,12 @@ Once the installation kicks in, it will start showing you pre-defined messages a
 **                                          **
 ** Author: Roberto Rodriguez (@Cyb3rWard0g) **
 ** HELK build version: 0.9 (Alpha)          **
-** HELK ELK version: 6.2.2                  **
+** HELK ELK version: 6.2.4                  **
 ** License: BSD 3-Clause                    **
 **********************************************
  
+[HELK-INSTALLATION-INFO] Available Memory: 16
+[HELK-INSTALLATION-INFO] Available Disk: 60
 [HELK-INSTALLATION-INFO] Obtaining current host IP..
 [HELK-INSTALLATION-INFO] Set HELK IP. Default value is your current IP: 192.168.64.131
 [HELK-INSTALLATION-INFO] HELK IP set to 192.168.64.131
@@ -93,72 +97,116 @@ Client:
  Orchestrator:	swarm
 ..
 ...
+ ---> Running in baae2db592a7
+Removing intermediate container baae2db592a7
+Creating helk-kibana ... done
+Creating helk-zookeeper ... done
+Creating helk-spark-master ... done
 Creating network "helk_helk" with driver "bridge"
 Creating volume "helk_esdata" with local driver
-Pulling helk-elk (cyb3rward0g/helk-elk:6.2.2)...
-6.2.2: Pulling from cyb3rward0g/helk-elk
-Digest: sha256:05025efb6c2fc0fef2790859aa98bb28c7c20e541bdbabda6751960a5adb65c2
-Status: Downloaded newer image for cyb3rward0g/helk-elk:6.2.2
-Pulling helk-kafka (cyb3rward0g/helk-kafka:1.0.0)...
-1.0.0: Pulling from cyb3rward0g/helk-kafka
-Digest: sha256:58b9252bf43e79734c935d4fac6ac910ad25ff6aeb1db8b6e6f699ccbb08a0b7
-Status: Downloaded newer image for cyb3rward0g/helk-kafka:1.0.0
-Pulling helk-analytics (cyb3rward0g/helk-analytics:0.0.1)...
-0.0.1: Pulling from cyb3rward0g/helk-analytics
-Digest: sha256:a3995ccb75da7a5d27736e5111f6db3d6d7bfff18d1618d0d66ee62086e995e0
-Status: Downloaded newer image for cyb3rward0g/helk-analytics:0.0.1
-Creating helk-kafka ... done
-Creating helk-kafka ... 
-Creating helk-analytics ...
+Creating helk-spark-worker2 ... done
+Creating helk-kibana ... 
+Creating helk-spark-master ... 
+Creating helk-zookeeper ... 
+Creating helk-logstash ... 
+Creating helk-nginx ... 
+Creating helk-kafka-broker ... 
+Creating helk-spark-worker2 ... 
+Creating helk-spark-worker ... 
+Creating helk-jupyter ... 
 ```
-Other logs that you should monitor also to see if everything is running properly after the installation are the following ones:
-* **Elasticsearch:**
-   * /var/log/elasticsearch/elasticsearch.log
-* **Logstash:**
-  * /var/log/logstash/logstash-plain.log
-* **Kibana:**
-  * /var/log/kibana/kibana.log
-* **Spark:**
-  * /var/log/spark/spark_pyspark.log
-* **Cerebro:**
-  * /var/log/cerebro/cerebro.log
-* **Kafka:**
-  * /var/log/kafka/helk-kafka_zookeeper.log
-  * /var/log/kafka/helk-kafka.log
-  * /var/log/kafka/helk-kafka_1.log
-  * /var/log/kafka/helk-kafka_2.log
-* **Analytics**
-  * /var/log/analytics/analytics.log
+Once you see that the containers have been created you can check all the containers running by running:
 
-Remember that the elasticsearch, logstash, kibana, nginx, Kafka and Analytic logs are available inside of your docker images. You can access your docker images by running the following commands:
+```
+helk@HELK:~$ sudo docker ps
+CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                            NAMES
+c0263aeaa3c3        helk_helk-spark-worker2   "./spark-worker-entr…"   23 seconds ago      Up 21 seconds       0.0.0.0:8082->8081/tcp                           helk-spark-worker2
+729edcf1ff97        helk_helk-jupyter         "./jupyter-entrypoin…"   23 seconds ago      Up 21 seconds       0.0.0.0:4040->4040/tcp, 0.0.0.0:8880->8880/tcp   helk-jupyter
+70cac0b20d9f        helk_helk-spark-worker    "./spark-worker-entr…"   23 seconds ago      Up 21 seconds       0.0.0.0:8081->8081/tcp                           helk-spark-worker
+2c618930d555        helk_helk-kafka-broker    "./kafka-entrypoint.…"   24 seconds ago      Up 21 seconds       0.0.0.0:9092->9092/tcp                           helk-kafka-broker
+2e5f790064e1        helk_helk-nginx           "./nginx-entrypoint.…"   24 seconds ago      Up 22 seconds       0.0.0.0:80->80/tcp                               helk-nginx
+7f6014946966        helk_helk-spark-master    "./spark-master-entr…"   26 seconds ago      Up 23 seconds       0.0.0.0:7077->7077/tcp, 0.0.0.0:8080->8080/tcp   helk-spark-master
+7cf46440ec58        helk_helk-zookeeper       "./zookeeper-entrypo…"   26 seconds ago      Up 23 seconds       2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp       helk-zookeeper
+e14f9dc2899f        helk_helk-logstash        "/usr/local/bin/dock…"   26 seconds ago      Up 23 seconds       0.0.0.0:5044->5044/tcp, 9600/tcp                 helk-logstash
+4cb80263117c        helk_helk-kibana          "./kibana-entrypoint…"   26 seconds ago      Up 24 seconds       5601/tcp                                         helk-kibana
+2e517a9fd8b8        helk_helk-elasticsearch   "/usr/local/bin/dock…"   27 seconds ago      Up 26 seconds       9200/tcp, 9300/tcp                               helk-elasticsearch
+```
+
+If you want to monitor the resources being utilized (Memory, CPU, etc), you can run the following:
+```
+helk@HELK:~$ sudo docker stats --all
+
+CONTAINER ID        NAME                 CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+c0263aeaa3c3        helk-spark-worker2   0.40%               106MiB / 7.594GiB     1.36%               3.18kB / 4.24kB     0B / 65.5kB         27
+729edcf1ff97        helk-jupyter         0.15%               37.79MiB / 7.594GiB   0.49%               1.97kB / 844B       0B / 65.5kB         1
+70cac0b20d9f        helk-spark-worker    0.39%               103.7MiB / 7.594GiB   1.33%               3.18kB / 4.22kB     0B / 65.5kB         27
+2c618930d555        helk-kafka-broker    0.72%               306.8MiB / 7.594GiB   3.95%               10.5kB / 11.3kB     393kB / 8.64MB      80
+2e5f790064e1        helk-nginx           0.04%               172KiB / 7.594GiB     0.00%               2.76kB / 2.38kB     131kB / 0B          2
+7f6014946966        helk-spark-master    0.55%               131.8MiB / 7.594GiB   1.69%               9.42kB / 4.45kB     0B / 65.5kB         33
+7cf46440ec58        helk-zookeeper       0.13%               50.39MiB / 7.594GiB   0.65%               11.7kB / 8.98kB     0B / 344kB          21
+e14f9dc2899f        helk-logstash        0.75%               267.7MiB / 7.594GiB   3.44%               1.04kB / 0B         0B / 221kB          13
+4cb80263117c        helk-kibana          0.03%               292KiB / 7.594GiB     0.00%               3.05kB / 2.6kB      2.02MB / 0B         2
+2e517a9fd8b8        helk-elasticsearch   0.89%               2.227GiB / 7.594GiB   29.33%              6.48kB / 3.68kB     0B / 233MB          3
+```
+
+You should also monitor the logs of each container while they are being initialized:
+
+Just run the following:
+
+```
+helk@HELK:~$ sudo docker logs --follow helk-elasticsearch
+OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+[2018-05-03T06:47:12,880][INFO ][o.e.n.Node               ] [helk-1] initializing ...
+[2018-05-03T06:47:13,121][INFO ][o.e.e.NodeEnvironment    ] [helk-1] using [1] data paths, mounts [[/usr/share/elasticsearch/data (/dev/mapper/HELK--vg-root)]], net usable_space [7.5gb], net total_space [14.2gb], types [ext4]
+[2018-05-03T06:47:13,123][INFO ][o.e.e.NodeEnvironment    ] [helk-1] heap size [3.9gb], compressed ordinary object pointers [true]
+[2018-05-03T06:47:13,128][INFO ][o.e.n.Node               ] [helk-1] node name [helk-1], node ID [1bPlK3y1R2ug6EQK2pdsMQ]
+[2018-05-03T06:47:13,129][INFO ][o.e.n.Node               ] [helk-1] version[6.2.4], pid[1], build[ccec39f/2018-04-12T20:37:28.497551Z], OS[Linux/4.4.0-87-generic/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_161/25.161-b14]
+[2018-05-03T06:47:13,131][INFO ][o.e.n.Node               ] [helk-1] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Djava.io.tmpdir=/tmp/elasticsearch.K1hNvi78, -XX:+HeapDumpOnOutOfMemoryError, -XX:+PrintGCDetails, -XX:+PrintGCDateStamps, -XX:+PrintTenuringDistribution, -XX:+PrintGCApplicationStoppedTime, -Xloggc:logs/gc.log, -XX:+UseGCLogFileRotation, -XX:NumberOfGCLogFiles=32, -XX:GCLogFileSize=64m, -Des.cgroups.hierarchy.override=/, -Xms4g, -Xmx4g, -Des.path.home=/usr/share/elasticsearch, -Des.path.conf=/usr/share/elasticsearch/config]
+[2018-05-03T06:47:24,642][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [aggs-matrix-stats]
+[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [analysis-common]
+[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [ingest-common]
+[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-expression]
+[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-mustache]
+[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-painless]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [mapper-extras]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [parent-join]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [percolator]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [rank-eval]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [reindex]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [repository-url]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [transport-netty4]
+[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [tribe]
+[2018-05-03T06:47:24,645][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [ingest-geoip]
+[2018-05-03T06:47:24,648][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [ingest-user-agent]
+[2018-05-03T06:47:24,648][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-core]
+[2018-05-03T06:47:24,648][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-deprecation]
+[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-graph]
+[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-logstash]
+[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-ml]
+[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-monitoring]
+[2018-05-03T06:47:24,650][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-security]
+[2018-05-03T06:47:24,650][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-upgrade]
+[2018-05-03T06:47:24,650][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-watcher]
+[2018-05-03T06:47:48,853][INFO ][o.e.x.m.j.p.l.CppLogMessageHandler] [controller/93] [Main.cc@128] controller (64 bit): Version 6.2.4 (Build 524e7fe231abc1) Copyright (c) 2018 Elasticsearch BV
+[2018-05-03T06:47:51,173][INFO ][o.e.d.DiscoveryModule    ] [helk-1] using discovery type [single-node]
+[2018-05-03T06:47:55,967][INFO ][o.e.n.Node               ] [helk-1] initialized
+[2018-05-03T06:47:55,976][INFO ][o.e.n.Node               ] [helk-1] starting ...
+[2018-05-03T06:47:56,867][INFO ][o.e.t.TransportService   ] [helk-1] publish_address {172.18.0.2:9300}, bound_addresses {0.0.0.0:9300}
+[2018-05-03T06:47:57,092][INFO ][o.e.x.s.t.n.SecurityNetty4HttpServerTransport] [helk-1] publish_address {172.18.0.2:9200}, bound_addresses {0.0.0.0:9200}
+[2018-05-03T06:47:57,096][INFO ][o.e.n.Node               ] [helk-1] started
+```
+
+All you need to do now for the other ones is define the containers name:
+```
+sudo docker logs --follow <container name>
+```
+
+Remember that you can also access your docker images by running the following commands:
 ```
 sudo docker exec -ti helk-elasticsearch bash
 root@7a9d6443a4bf:/opt/helk/scripts# 
 ```
-```
-sudo docker exec -ti helk-kibana bash
-root@7a9d6883a4bf:/opt/helk/scripts# 
-```
-```
-sudo docker exec -ti helk-logstash bash
-root@7a9d6773a4bf:/opt/helk/scripts# 
-```
-```
-sudo docker exec -ti helk-nginx bash
-root@7a9d6333a4bf:/opt/helk/scripts# 
-```
-```
-sudo docker exec -ti helk-kafka bash
-root@7a9d6443a4bf:/opt/helk/scripts# 
-```
-```
-sudo docker exec -ti helk-analytics bash
-root@7a9d6443a4bf:/opt/helk/scripts# 
-```
-You can also monitor your **Docker logs**. The **"Docker logs"** command batch-retrieves logs present at the time of execution of the **entrypoint** scripts. This will allow you, for example, to see the execution of the [elk-entrypoint.sh](https://github.com/Cyb3rWard0g/HELK/blob/master/helk-elasticsearch/scripts/entrypoint.sh) bash script once the the docker image is run. Run the following commands:
-```
-sudo docker logs helk-ellasticsearch
-```
+
 # Final Details
 Once your HELK installation ends, you will be presented with information that you will need to access the HELK and all its features. You will also have the Jupyter Notebook server running and ready to be used. The HELK uses Jupyter Lab. **You will still need to access the Jupyter Lab web interface and access/create a notebook in order to initialize the Spark Context (This initializes the default Python Kernel)**. You will have the following message showing in your main screen:
 ```
@@ -169,7 +217,6 @@ Once your HELK installation ends, you will be presented with information that yo
  
 HELK KIBANA URL: http://192.168.64.131
 HELK ELASTICSEARCH EXTERNAL URL: http://192.168.64.131:8082
-HELK CEREBRO URL: http://192.168.64.131:9000
 HELK KIBANA & ELASTICSEARCH USER: helk
 HELK KIBANA & ELASTICSEARCH PASSWORD: hunting
 HELK JUPYTER CURRENT TOKEN: 3f46301da4cd20011391327647000e8006ee3574cab0b163
