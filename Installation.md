@@ -1,15 +1,15 @@
 # Requirements
 * **OS Name:**
-Specific Linux distros or OS X supported if Docker & Docker-Compose are not installed yet. If so, then the HELK images should work fine with any OS.
-    * HELK uses the official Docker Community Edition (CE) bash script (Edge Version) to install Docker if it is not installed yet. The Docker CE Edge script supports the following distros: **ubuntu**, **debian**, **raspbian**, **centos**, and **fedora**.
-    * You can see the specific distro versions supported in the script [here](https://get.docker.com/).
-    * If you have Docker & Docker-Compose already installed in your system, then you should be good to go (this would skip the Docker CE Edge script execution). 
+  * Ubuntu 16.04 (preferred) 
+  * HELK uses the official Docker Community Edition (CE) bash script (Edge Version) to install Docker if it is not installed yet. The Docker CE Edge script supports the following distros: **ubuntu**, **debian**, **raspbian**, **centos**, and **fedora**.
+  * You can see the specific distro versions supported in the script [here](https://get.docker.com/).
+  * If you have Docker & Docker-Compose already installed in your system, then you should be good to go (this would skip the Docker CE Edge script execution). 
 * **Network Connection:** NAT or Bridge
 * **RAM:** 16GB (minimum)
 * **Cores:** 4 (minimum)
 * **Disk:** 50gb for testing purposes and 100gb+ for production (minimum)
 * **Applications:**
-  * Docker & Docker-Compose
+  * Docker: 18.05.0-ce+ & Docker-Compose (Highly recommended to let HELK install it for you)
   * Winlogbeat running on your endpoints. You can install Winlogbeat by following one of [@Cyb3rWard0g](https://twitter.com/Cyb3rWard0g) posts [here](https://cyberwardog.blogspot.com/2017/02/setting-up-pentesting-i-mean-threat_87.html). Make sure you use the [winlogbeat config](https://github.com/Cyb3rWard0g/HELK/blob/master/winlogbeat/winlogbeat.yml) recommended by the HELK since it uses the [Kafka output plugin](https://www.elastic.co/guide/en/beats/winlogbeat/current/kafka-output.html) and it is already pointing to the right ports with recommended options. You will just have to add your HELK's IP address. 
 # HELK Download
 Run the following commands to clone the HELK repo via git.
@@ -22,62 +22,39 @@ cd HELK/
 sudo ./helk_install.sh
 ```
 # HELK Install
-In order to make the installation of the HELK easy for everyone, the project comes with the helk_install.sh script that builds and runs everything you need to start the HELK automatically. You will just have to confirm that you want to use your HOST IP address for the HELK, unless you want to use a different one. Press \[Return\] or let the script continue on its own (30 Seconds sleep).
+In order to make the installation of the HELK easy for everyone, the project comes with the helk_install.sh script that builds and runs everything you need to start the HELK automatically. You will just have to do the following:
+* Set the HELK's IP. By default you can confirm that you want to use your HOST IP address for the HELK, unless you want to use a different one. Press \[Return\] or let the script continue on its own (30 Seconds sleep).
+* Set the HELK's License Subscription. By default the HELK has the **basic** subscription selected. You can set it to **trial** if you want. If you want to learn more about subscriptions go [here](https://www.elastic.co/subscriptions) 
 
 ```
 **********************************************
 **          HELK - THE HUNTING ELK          **
 **                                          **
 ** Author: Roberto Rodriguez (@Cyb3rWard0g) **
-** HELK build version: 0.9 (Alpha)          **
-** HELK ELK version: 6.2.4                  **
-** License: BSD 3-Clause                    **
+** HELK build version: v0.1.1-alpha07062018 **
+** HELK ELK version: 6.3.1                  **
+** License: GPL-3.0                         **
 **********************************************
  
-[HELK-INSTALLATION-INFO] Available Memory: 16
-[HELK-INSTALLATION-INFO] Available Disk: 60
+[HELK-INSTALLATION-INFO] HELK being hosted on a Linux box
+[HELK-INSTALLATION-INFO] Available Memory: 11
+[HELK-INSTALLATION-INFO] Available Disk: 40		
 [HELK-INSTALLATION-INFO] Obtaining current host IP..
 [HELK-INSTALLATION-INFO] Set HELK IP. Default value is your current IP: 192.168.64.131
+[HELK-INSTALLATION-INFO] Set HELK License. Default value is basic: basic
 [HELK-INSTALLATION-INFO] HELK IP set to 192.168.64.131
-[HELK-INSTALLATION-INFO] HELK identified Linux as the system kernel
+[HELK-INSTALLATION-INFO] HELK License set to basic
+[HELK-INSTALLATION-INFO] Checking distribution list and version
 ....
 ......
 ```
 # Always monitor HELK installation Logs
 Once the installation kicks in, it will start showing you pre-defined messages about the installation, but no all the details of what is actually happening in the background. It is designed that way to keep your main screen clean and let you know where it is in the installation process.
-```
-**********************************************
-**          HELK - THE HUNTING ELK          **
-**                                          **
-** Author: Roberto Rodriguez (@Cyb3rWard0g) **
-** HELK build version: 0.9 (Alpha)          **
-** HELK ELK version: 6.2.4                  **
-** License: BSD 3-Clause                    **
-**********************************************
- 
-[HELK-INSTALLATION-INFO] Available Memory: 16
-[HELK-INSTALLATION-INFO] Available Disk: 60
-[HELK-INSTALLATION-INFO] Obtaining current host IP..
-[HELK-INSTALLATION-INFO] Set HELK IP. Default value is your current IP: 192.168.64.131
-[HELK-INSTALLATION-INFO] HELK IP set to 192.168.64.131
-[HELK-INSTALLATION-INFO] HELK identified Linux as the system kernel
-[HELK-INSTALLATION-INFO] Checking distribution list and version
-[HELK-INSTALLATION-INFO] You're using ubuntu version xenial
-[HELK-INSTALLATION-INFO] Docker is not installed
-[HELK-INSTALLATION-INFO] Checking if curl is installed first
-[HELK-INSTALLATION-INFO] curl is already installed
-[HELK-INSTALLATION-INFO] Ready to install  Docker..
-[HELK-INSTALLATION-INFO] Installing docker via convenience script..
-[HELK-INSTALLATION-INFO] Installing docker-compose ..
-[HELK-INSTALLATION-INFO] Checking local vm.max_map_count variable and setting it to 262144
-[HELK-INSTALLATION-INFO] Installing HELK via docker-compose
-...
-....
-```
-What I recommend to do all the time is to open another shell and monitor the HELK installation logs by using the **tail** command and pointing it to the **/var/log/helk-install.log** file. This log file is available always on the host even if you are deploying the HELK via Docker.
+
+What I recommend to do all the time is to open another shell and monitor the HELK installation logs by using the **tail** command and pointing it to the **/var/log/helk-install.log** file that gets created by the **helk_install** script as soon as it is run. This log file is available always on the host even if you are deploying the HELK via Docker.
 ```
 helk@HELK:~$ tail -f /var/log/helk-install.log 
-# Executing docker install script, commit: 5f7af95
+# Executing docker install script, commit: 36b78b2
 + sh -c apt-get update -qq >/dev/null
 + sh -c apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
 + sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | apt-key add -qq - >/dev/null
@@ -87,66 +64,105 @@ helk@HELK:~$ tail -f /var/log/helk-install.log
 + sh -c apt-get install -y -qq --no-install-recommends docker-ce >/dev/null
 + sh -c docker version
 Client:
- Version:	18.02.0-ce
- API version:	1.36
- Go version:	go1.9.3
- Git commit:	fc4de44
- Built:	Wed Feb  7 21:16:33 2018
- OS/Arch:	linux/amd64
- Experimental:	false
- Orchestrator:	swarm
-..
-...
- ---> Running in baae2db592a7
-Removing intermediate container baae2db592a7
-Creating helk-kibana ... done
-Creating helk-zookeeper ... done
-Creating helk-spark-master ... done
+ Version:      18.05.0-ce
+ API version:  1.37
+ Go version:   go1.9.5
+ Git commit:   f150324
+ Built:        Wed May  9 22:16:25 2018
+ OS/Arch:      linux/amd64
+ Experimental: false
+ Orchestrator: swarm
+
+Server:
+ Engine:
+  Version:      18.05.0-ce
+  API version:  1.37 (minimum version 1.12)
+  Go version:   go1.9.5
+  Git commit:   f150324
+  Built:        Wed May  9 22:14:32 2018
+  OS/Arch:      linux/amd64
+  Experimental: false
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like:
+
+  sudo usermod -aG docker your-user
+
+Remember that you will have to log out and back in for this to take effect!
+
+WARNING: Adding a user to the "docker" group will grant the ability to run
+         containers which can be used to obtain root privileges on the
+         docker host.
+         Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
+         for more information.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   617    0   617    0     0   1979      0 --:--:-- --:--:-- --:--:--  1983
+100 8288k  100 8288k    0     0  2282k      0  0:00:03  0:00:03 --:--:-- 2507k
 Creating network "helk_helk" with driver "bridge"
 Creating volume "helk_esdata" with local driver
-Creating helk-spark-worker2 ... done
-Creating helk-kibana ... 
+Pulling helk-elasticsearch (docker.elastic.co/elasticsearch/elasticsearch:6.3.1)...
+6.3.1: Pulling from elasticsearch/elasticsearch
+..
+...
+Creating helk-jupyter ... done
+Creating helk-elasticsearch ... done
+Digest: sha256:019081b63dd8a10826629de3fded6664f2a52a47f99323c190dfa9da3cdaf2d5
+Status: Downloaded newer image for cyb3rward0g/helk-kafka-broker:1.1.0
+Pulling helk-sigma (thomaspatzke/helk-sigma:latest)...
+Creating helk-spark-master ... done
+Digest: sha256:5a4568af3fc3a1e0c0ef37326553a9dd9b719ed3c93c93aed18d9131b755c1e0
+Creating helk-zookeeper ... done
+Pulling helk-logstash (docker.elastic.co/logstash/logstash:6.3.1)...
+Creating helk-kibana ... done
+Digest: sha256:e2e932fc7ce50e7e6c1152b4bd723db8c6e699524ec0fc27b5ea7580444c4d58
+Status: Downloaded newer image for docker.elastic.co/logstash/logstash:6.3.1
+Creating helk-kafka-broker ... done
 Creating helk-spark-master ... 
+Creating helk-kibana ... 
 Creating helk-zookeeper ... 
 Creating helk-logstash ... 
-Creating helk-nginx ... 
-Creating helk-kafka-broker ... 
-Creating helk-spark-worker2 ... 
 Creating helk-spark-worker ... 
+Creating helk-spark-worker2 ... 
+Creating helk-kafka-broker ... 
+Creating helk-kafka-broker2 ... 
 Creating helk-jupyter ... 
+Creating helk-sigma ... 
+Creating helk-nginx ... 
 ```
-Once you see that the containers have been created you can check all the containers running by running:
+Once you see that the containers have been created you can check all the containers running by executing the following:
 
 ```
 helk@HELK:~$ sudo docker ps
-CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                            NAMES
-c0263aeaa3c3        helk_helk-spark-worker2   "./spark-worker-entr…"   23 seconds ago      Up 21 seconds       0.0.0.0:8082->8081/tcp                           helk-spark-worker2
-729edcf1ff97        helk_helk-jupyter         "./jupyter-entrypoin…"   23 seconds ago      Up 21 seconds       0.0.0.0:4040->4040/tcp, 0.0.0.0:8880->8880/tcp   helk-jupyter
-70cac0b20d9f        helk_helk-spark-worker    "./spark-worker-entr…"   23 seconds ago      Up 21 seconds       0.0.0.0:8081->8081/tcp                           helk-spark-worker
-2c618930d555        helk_helk-kafka-broker    "./kafka-entrypoint.…"   24 seconds ago      Up 21 seconds       0.0.0.0:9092->9092/tcp                           helk-kafka-broker
-2e5f790064e1        helk_helk-nginx           "./nginx-entrypoint.…"   24 seconds ago      Up 22 seconds       0.0.0.0:80->80/tcp                               helk-nginx
-7f6014946966        helk_helk-spark-master    "./spark-master-entr…"   26 seconds ago      Up 23 seconds       0.0.0.0:7077->7077/tcp, 0.0.0.0:8080->8080/tcp   helk-spark-master
-7cf46440ec58        helk_helk-zookeeper       "./zookeeper-entrypo…"   26 seconds ago      Up 23 seconds       2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp       helk-zookeeper
-e14f9dc2899f        helk_helk-logstash        "/usr/local/bin/dock…"   26 seconds ago      Up 23 seconds       0.0.0.0:5044->5044/tcp, 9600/tcp                 helk-logstash
-4cb80263117c        helk_helk-kibana          "./kibana-entrypoint…"   26 seconds ago      Up 24 seconds       5601/tcp                                         helk-kibana
-2e517a9fd8b8        helk_helk-elasticsearch   "/usr/local/bin/dock…"   27 seconds ago      Up 26 seconds       9200/tcp, 9300/tcp                               helk-elasticsearch
+CONTAINER ID        IMAGE                                       COMMAND                  CREATED             STATUS              PORTS                                                      NAMES
+e625e89862dc        helk_helk-jupyter                           "./jupyter-entrypoin…"   About an hour ago   Up About an hour    0.0.0.0:4040-4050->4040-4050/tcp, 0.0.0.0:8880->8880/tcp   helk-jupyter
+30e0bbeb472c        cyb3rward0g/helk-nginx:0.0.3                "./nginx-entrypoint.…"   About an hour ago   Up About an hour    0.0.0.0:80->80/tcp                                         helk-nginx
+669a2cce38e2        cyb3rward0g/helk-kafka-broker:1.1.0         "./kafka-entrypoint.…"   About an hour ago   Up About an hour    0.0.0.0:9093->9093/tcp                                     helk-kafka-broker2
+b9e72b736f11        cyb3rward0g/helk-kafka-broker:1.1.0         "./kafka-entrypoint.…"   About an hour ago   Up About an hour    0.0.0.0:9092->9092/tcp                                     helk-kafka-broker
+cfcfd0607e41        cyb3rward0g/helk-spark-worker:2.3.1         "./spark-worker-entr…"   About an hour ago   Up About an hour    0.0.0.0:8082->8082/tcp                                     helk-spark-worker2
+7ddf75da3e5b        cyb3rward0g/helk-spark-worker:2.3.1         "./spark-worker-entr…"   About an hour ago   Up About an hour    0.0.0.0:8081->8081/tcp                                     helk-spark-worker
+71a0a38968d2        docker.elastic.co/kibana/kibana:6.3.1       "/usr/share/kibana/s…"   About an hour ago   Up About an hour    5601/tcp                                                   helk-kibana
+e4c89c73b6aa        docker.elastic.co/logstash/logstash:6.3.1   "/usr/local/bin/dock…"   About an hour ago   Up About an hour    5044/tcp, 9600/tcp                                         helk-logstash
+2a21f25f1879        cyb3rward0g/helk-zookeeper:3.4.10           "./zookeeper-entrypo…"   About an hour ago   Up About an hour    2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp                 helk-zookeeper
+a494b87627f8        cyb3rward0g/helk-spark-master:2.3.1         "./spark-master-entr…"   About an hour ago   Up About an hour    0.0.0.0:7077->7077/tcp, 0.0.0.0:8080->8080/tcp             helk-spark-master
+d19d0d9d0533        helk_helk-elasticsearch                     "/usr/local/bin/dock…"   About an hour ago   Up About an hour    9200/tcp, 9300/tcp                                         helk-elasticsearch
 ```
 
 If you want to monitor the resources being utilized (Memory, CPU, etc), you can run the following:
 ```
 helk@HELK:~$ sudo docker stats --all
-
 CONTAINER ID        NAME                 CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
-c0263aeaa3c3        helk-spark-worker2   0.40%               106MiB / 7.594GiB     1.36%               3.18kB / 4.24kB     0B / 65.5kB         27
-729edcf1ff97        helk-jupyter         0.15%               37.79MiB / 7.594GiB   0.49%               1.97kB / 844B       0B / 65.5kB         1
-70cac0b20d9f        helk-spark-worker    0.39%               103.7MiB / 7.594GiB   1.33%               3.18kB / 4.22kB     0B / 65.5kB         27
-2c618930d555        helk-kafka-broker    0.72%               306.8MiB / 7.594GiB   3.95%               10.5kB / 11.3kB     393kB / 8.64MB      80
-2e5f790064e1        helk-nginx           0.04%               172KiB / 7.594GiB     0.00%               2.76kB / 2.38kB     131kB / 0B          2
-7f6014946966        helk-spark-master    0.55%               131.8MiB / 7.594GiB   1.69%               9.42kB / 4.45kB     0B / 65.5kB         33
-7cf46440ec58        helk-zookeeper       0.13%               50.39MiB / 7.594GiB   0.65%               11.7kB / 8.98kB     0B / 344kB          21
-e14f9dc2899f        helk-logstash        0.75%               267.7MiB / 7.594GiB   3.44%               1.04kB / 0B         0B / 221kB          13
-4cb80263117c        helk-kibana          0.03%               292KiB / 7.594GiB     0.00%               3.05kB / 2.6kB      2.02MB / 0B         2
-2e517a9fd8b8        helk-elasticsearch   0.89%               2.227GiB / 7.594GiB   29.33%              6.48kB / 3.68kB     0B / 233MB          3
+d7543613aa67        helk-sigma           0.00%               0B / 0B               0.00%               0B / 0B             0B / 0B             0
+e625e89862dc        helk-jupyter         1.87%               40.53MiB / 11.44GiB   0.35%               1.1kB / 138B        76.1MB / 65.5kB     1
+30e0bbeb472c        helk-nginx           4.19%               172KiB / 11.44GiB     0.00%               11.2kB / 13.7kB     19.4MB / 8.59MB     2
+669a2cce38e2        helk-kafka-broker2   15.57%              265.2MiB / 11.44GiB   2.26%               136kB / 116kB       45.3MB / 26MB       66
+b9e72b736f11        helk-kafka-broker    14.19%              317.4MiB / 11.44GiB   2.71%               188kB / 195kB       30.7MB / 9.08MB     68
+cfcfd0607e41        helk-spark-worker2   5.19%               157.5MiB / 11.44GiB   1.34%               4.8kB / 18.7kB      28.8MB / 4.26MB     26
+7ddf75da3e5b        helk-spark-worker    5.18%               147.8MiB / 11.44GiB   1.26%               5.78kB / 20.4kB     77.6MB / 221kB      26
+71a0a38968d2        helk-kibana          4.29%               292KiB / 11.44GiB     0.00%               11kB / 13.6kB       17.7MB / 17MB       2
+e4c89c73b6aa        helk-logstash        68.06%              741.1MiB / 11.44GiB   6.33%               1.92kB / 1.19kB     281MB / 39.3MB      28
+2a21f25f1879        helk-zookeeper       2.38%               54.35MiB / 11.44GiB   0.46%               84.1kB / 93.7kB     50MB / 647kB        23
+a494b87627f8        helk-spark-master    6.82%               162.1MiB / 11.44GiB   1.38%               40.2kB / 8.56kB     61MB / 106kB        35
+d19d0d9d0533        helk-elasticsearch   46.30%              3.973GiB / 11.44GiB   34.73%              29.4kB / 21.1kB     1.59GB / 4.29GB     19
 ```
 
 You should also monitor the logs of each container while they are being initialized:
@@ -155,45 +171,57 @@ Just run the following:
 
 ```
 helk@HELK:~$ sudo docker logs --follow helk-elasticsearch
-OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
-[2018-05-03T06:47:12,880][INFO ][o.e.n.Node               ] [helk-1] initializing ...
-[2018-05-03T06:47:13,121][INFO ][o.e.e.NodeEnvironment    ] [helk-1] using [1] data paths, mounts [[/usr/share/elasticsearch/data (/dev/mapper/HELK--vg-root)]], net usable_space [7.5gb], net total_space [14.2gb], types [ext4]
-[2018-05-03T06:47:13,123][INFO ][o.e.e.NodeEnvironment    ] [helk-1] heap size [3.9gb], compressed ordinary object pointers [true]
-[2018-05-03T06:47:13,128][INFO ][o.e.n.Node               ] [helk-1] node name [helk-1], node ID [1bPlK3y1R2ug6EQK2pdsMQ]
-[2018-05-03T06:47:13,129][INFO ][o.e.n.Node               ] [helk-1] version[6.2.4], pid[1], build[ccec39f/2018-04-12T20:37:28.497551Z], OS[Linux/4.4.0-87-generic/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_161/25.161-b14]
-[2018-05-03T06:47:13,131][INFO ][o.e.n.Node               ] [helk-1] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Djava.io.tmpdir=/tmp/elasticsearch.K1hNvi78, -XX:+HeapDumpOnOutOfMemoryError, -XX:+PrintGCDetails, -XX:+PrintGCDateStamps, -XX:+PrintTenuringDistribution, -XX:+PrintGCApplicationStoppedTime, -Xloggc:logs/gc.log, -XX:+UseGCLogFileRotation, -XX:NumberOfGCLogFiles=32, -XX:GCLogFileSize=64m, -Des.cgroups.hierarchy.override=/, -Xms4g, -Xmx4g, -Des.path.home=/usr/share/elasticsearch, -Des.path.conf=/usr/share/elasticsearch/config]
-[2018-05-03T06:47:24,642][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [aggs-matrix-stats]
-[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [analysis-common]
-[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [ingest-common]
-[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-expression]
-[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-mustache]
-[2018-05-03T06:47:24,643][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-painless]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [mapper-extras]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [parent-join]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [percolator]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [rank-eval]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [reindex]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [repository-url]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [transport-netty4]
-[2018-05-03T06:47:24,644][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [tribe]
-[2018-05-03T06:47:24,645][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [ingest-geoip]
-[2018-05-03T06:47:24,648][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [ingest-user-agent]
-[2018-05-03T06:47:24,648][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-core]
-[2018-05-03T06:47:24,648][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-deprecation]
-[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-graph]
-[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-logstash]
-[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-ml]
-[2018-05-03T06:47:24,649][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-monitoring]
-[2018-05-03T06:47:24,650][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-security]
-[2018-05-03T06:47:24,650][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-upgrade]
-[2018-05-03T06:47:24,650][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [x-pack-watcher]
-[2018-05-03T06:47:48,853][INFO ][o.e.x.m.j.p.l.CppLogMessageHandler] [controller/93] [Main.cc@128] controller (64 bit): Version 6.2.4 (Build 524e7fe231abc1) Copyright (c) 2018 Elasticsearch BV
-[2018-05-03T06:47:51,173][INFO ][o.e.d.DiscoveryModule    ] [helk-1] using discovery type [single-node]
-[2018-05-03T06:47:55,967][INFO ][o.e.n.Node               ] [helk-1] initialized
-[2018-05-03T06:47:55,976][INFO ][o.e.n.Node               ] [helk-1] starting ...
-[2018-05-03T06:47:56,867][INFO ][o.e.t.TransportService   ] [helk-1] publish_address {172.18.0.2:9300}, bound_addresses {0.0.0.0:9300}
-[2018-05-03T06:47:57,092][INFO ][o.e.x.s.t.n.SecurityNetty4HttpServerTransport] [helk-1] publish_address {172.18.0.2:9200}, bound_addresses {0.0.0.0:9200}
-[2018-05-03T06:47:57,096][INFO ][o.e.n.Node               ] [helk-1] started
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+[2018-07-11T17:06:48,679][INFO ][o.e.n.Node               ] [helk-1] initializing ...
+[2018-07-11T17:06:48,836][INFO ][o.e.e.NodeEnvironment    ] [helk-1] using [1] data paths, mounts [[/usr/share/elasticsearch/data (/dev/mapper/HELK--vg-root)]], net usable_space [35.4gb], net total_space [43.8gb], types [ext4]
+[2018-07-11T17:06:48,837][INFO ][o.e.e.NodeEnvironment    ] [helk-1] heap size [5.9gb], compressed ordinary object pointers [true]
+[2018-07-11T17:06:48,840][INFO ][o.e.n.Node               ] [helk-1] node name [helk-1], node ID [AXTFJ_-HTy2_coCqh6HBCg]
+[2018-07-11T17:06:48,844][INFO ][o.e.n.Node               ] [helk-1] version[6.3.1], pid[1], build[default/tar/eb782d0/2018-06-29T21:59:26.107521Z], OS[Linux/4.4.0-87-generic/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/10.0.1/10.0.1+10]
+[2018-07-11T17:06:48,844][INFO ][o.e.n.Node               ] [helk-1] JVM arguments [-Xms1g, -Xmx1g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Djava.io.tmpdir=/tmp/elasticsearch.NDCUgQDZ, -XX:+HeapDumpOnOutOfMemoryError, -XX:HeapDumpPath=data, -XX:ErrorFile=logs/hs_err_pid%p.log, -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m, -Djava.locale.providers=COMPAT, -Des.cgroups.hierarchy.override=/, -Xms6g, -Xmx6g, -Des.path.home=/usr/share/elasticsearch, -Des.path.conf=/usr/share/elasticsearch/config, -Des.distribution.flavor=default, -Des.distribution.type=tar]
+[2018-07-11T17:06:53,727][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [aggs-matrix-stats]
+[2018-07-11T17:06:53,732][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [analysis-common]
+[2018-07-11T17:06:53,732][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [ingest-common]
+[2018-07-11T17:06:53,734][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-expression]
+[2018-07-11T17:06:53,734][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-mustache]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [lang-painless]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [mapper-extras]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [parent-join]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [percolator]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [rank-eval]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [reindex]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [repository-url]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [transport-netty4]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [tribe]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-core]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-deprecation]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-graph]
+[2018-07-11T17:06:53,735][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-logstash]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-ml]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-monitoring]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-rollup]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-security]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-sql]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-upgrade]
+[2018-07-11T17:06:53,741][INFO ][o.e.p.PluginsService     ] [helk-1] loaded module [x-pack-watcher]
+[2018-07-11T17:06:53,742][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [ingest-geoip]
+[2018-07-11T17:06:53,742][INFO ][o.e.p.PluginsService     ] [helk-1] loaded plugin [ingest-user-agent]
+[2018-07-11T17:07:01,205][INFO ][o.e.x.m.j.p.l.CppLogMessageHandler] [controller/76] [Main.cc@109] controller (64 bit): Version 6.3.1 (Build 4d0b8f0a0ef401) Copyright (c) 2018 Elasticsearch BV
+[2018-07-11T17:07:02,748][INFO ][o.e.d.DiscoveryModule    ] [helk-1] using discovery type [single-node]
+[2018-07-11T17:07:04,389][INFO ][o.e.n.Node               ] [helk-1] initialized
+[2018-07-11T17:07:04,390][INFO ][o.e.n.Node               ] [helk-1] starting ...
+[2018-07-11T17:07:04,848][INFO ][o.e.t.TransportService   ] [helk-1] publish_address {172.18.0.2:9300}, bound_addresses {0.0.0.0:9300}
+[2018-07-11T17:07:05,036][INFO ][o.e.h.n.Netty4HttpServerTransport] [helk-1] publish_address {172.18.0.2:9200}, bound_addresses {0.0.0.0:9200}
+[2018-07-11T17:07:05,036][INFO ][o.e.n.Node               ] [helk-1] started
+[2018-07-11T17:07:05,317][INFO ][o.e.g.GatewayService     ] [helk-1] recovered [0] indices into cluster_state
+[2018-07-11T17:07:05,742][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.watches] for index patterns [.watches*]
+[2018-07-11T17:07:05,785][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.triggered_watches] for index patterns [.triggered_watches*]
+[2018-07-11T17:07:05,910][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.watch-history-7] for index patterns [.watcher-history-7*]
+[2018-07-11T17:07:06,024][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.monitoring-logstash] for index patterns [.monitoring-logstash-6-*]
+[2018-07-11T17:07:06,135][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.monitoring-es] for index patterns [.monitoring-es-6-*]
+[2018-07-11T17:07:06,214][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.monitoring-alerts] for index patterns [.monitoring-alerts-6]
+[2018-07-11T17:07:06,329][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.monitoring-beats] for index patterns [.monitoring-beats-6-*]
+[2018-07-11T17:07:06,371][INFO ][o.e.c.m.MetaDataIndexTemplateService] [helk-1] adding template [.monitoring-kibana] for index patterns [.monitoring-kibana-6-*]
+[2018-07-11T17:07:06,616][INFO ][o.e.l.LicenseService     ] [helk-1] license [de9d2c22-1c5a-4888-9e04-4433b4f3b669] mode [basic] - valid
 ```
 
 All you need to do now for the other ones is define the containers name:
@@ -216,16 +244,15 @@ Once your HELK installation ends, you will be presented with information that yo
 ***********************************************************************************
  
 HELK KIBANA URL: http://192.168.64.131
-HELK ELASTICSEARCH EXTERNAL URL: http://192.168.64.131:8082
 HELK KIBANA & ELASTICSEARCH USER: helk
 HELK KIBANA & ELASTICSEARCH PASSWORD: hunting
-HELK JUPYTER CURRENT TOKEN: 3f46301da4cd20011391327647000e8006ee3574cab0b163
+HELK JUPYTER CURRENT TOKEN: 3ff8ccfb7f9d4fb6faea7a381ed15d69a6250d359fd0d45f
 HELK JUPYTER LAB URL: http://192.168.64.131:8880/lab
 HELK SPARK Pyspark UI: http://192.168.64.131:4040
 HELK SPARK Cluster Master UI: http://192.168.64.131:8080
 HELK SPARK Cluster Worker1 UI: http://192.168.64.131:8081
 HELK SPARK Cluster Worker2 UI: http://192.168.64.131:8082
-
+ 
 IT IS HUNTING SEASON!!!!!
 ```
 Use the **JUPYTER CURRENT TOKEN** to access the Jupyter Notebook web interface.
