@@ -1,15 +1,15 @@
 # Requirements
 * **OS Name:**
   * Ubuntu 16.04 (preferred) 
-  * HELK uses the official Docker Community Edition (CE) bash script (Edge Version) to install Docker if it is not installed yet. The Docker CE Edge script supports the following distros: **ubuntu**, **debian**, **raspbian**, **centos**, and **fedora**.
+  * HELK uses the official Docker Community Edition (CE) bash script (Edge Version) to install Docker for you. The Docker CE Edge script supports the following distros: **ubuntu**, **debian**, **raspbian**, **centos**, and **fedora**.
   * You can see the specific distro versions supported in the script [here](https://get.docker.com/).
-  * If you have Docker & Docker-Compose already installed in your system, then you should be good to go (this would skip the Docker CE Edge script execution). 
+  * If you have Docker & Docker-Compose already installed in your system, make sure you uninstall them to avoid old incompatible version. Let HELK use the official Docker CE Edge script execution to install Docker. 
 * **Network Connection:** NAT or Bridge
 * **RAM:** 16GB (minimum)
 * **Cores:** 4 (minimum)
 * **Disk:** 50gb for testing purposes and 100gb+ for production (minimum)
 * **Applications:**
-  * Docker: 18.05.0-ce+ & Docker-Compose (Highly recommended to let HELK install it for you)
+  * Docker: 18.05.0-ce+ & Docker-Compose (HELK INSTALLS THIS FOR YOU)
   * Winlogbeat running on your endpoints. You can install Winlogbeat by following one of [@Cyb3rWard0g](https://twitter.com/Cyb3rWard0g) posts [here](https://cyberwardog.blogspot.com/2017/02/setting-up-pentesting-i-mean-threat_87.html). Make sure you use the [winlogbeat config](https://github.com/Cyb3rWard0g/HELK/blob/master/winlogbeat/winlogbeat.yml) recommended by the HELK since it uses the [Kafka output plugin](https://www.elastic.co/guide/en/beats/winlogbeat/current/kafka-output.html) and it is already pointing to the right ports with recommended options. You will just have to add your HELK's IP address. 
 # HELK Download
 Run the following commands to clone the HELK repo via git.
