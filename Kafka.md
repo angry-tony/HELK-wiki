@@ -26,7 +26,7 @@ winlogbeat.event_logs:
     event_id: 5857,5858,5859,5860,5861
 
 output.kafka:
-  hosts: ["<HELK-IP>:9092","<HELK-IP>:9093","<HELK-IP>:9094"]
+  hosts: ["<HELK-IP>:9092","<HELK-IP>:9093"]
   topic: "winlogbeat"
   max_retries: 2
   max_message_bytes: 1000000
