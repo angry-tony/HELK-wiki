@@ -71,7 +71,7 @@ Kafka automatically creates 3 topics:
 ## Are you receiving logs from producers?
 You can confirm that you are ingesting logs to your Kafka brokers by running the following commands:
 ```
-/opt/helk/kafka/kafka_2.11-x.x.x/bin/kafka-console-consumer.sh --bootstrap-server 192.168.64.131:9092 --topic winlogbeat --from-beginning
+/opt/helk/kafka/bin/kafka-console-consumer.sh --bootstrap-server 192.168.64.131:9092 --topic winlogbeat --from-beginning
 ```
 Make sure you are inside of the container before running that command. You can access your container by running the following:
 ```
